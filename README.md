@@ -33,7 +33,6 @@
 14. [Tools untuk Mencegah Error](#️-tools-untuk-mencegah-error)
 15. [Contoh Perhitungan Denda](#-contoh-perhitungan-denda)
 16. [FAQ](#-faq-frequently-asked-questions)
-17. [Tracking & Improvement](#-tracking--improvement)
 
 ---
 
