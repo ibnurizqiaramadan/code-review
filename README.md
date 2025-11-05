@@ -1,22 +1,37 @@
+# 📚 Panduan Denda Code Review
+
+> **[🚀 Getting Started](./GETTING-STARTED.md)** - Panduan untuk developer baru  
+> **[🗺️ Navigation](./NAVIGATION.md)** - Panduan navigasi dokumen  
+> **[📖 Summary](./SUMMARY.md)** - Overview semua panduan yang tersedia  
+> **[⚡ Quick Reference](./QUICK-REFERENCE.md)** - Cheat sheet (printable)
+
 | Level                                           | Jenis Kesalahan                                         | Contoh                                                                                           | Denda                              | Dampak / Alasan                                   |
 | :---------------------------------------------- | :------------------------------------------------------ | :----------------------------------------------------------------------------------------------- | :--------------------------------- | :------------------------------------------------ |
-| **L1 – Basic Logic / Syntax Error**             | Kesalahan dasar yang seharusnya ketangkep lint/test     | Typo variabel, salah operator (`==` vs `===`), lupa `return`                                     | **Rp 2.000**                       | Kesalahan dasar, tanda kurang cek sebelum commit  |
-| **L2 – Code Style / Konsistensi**               | Ganggu readability / konsistensi tim                    | Nama variabel ambigu, indentasi acak, comment lama gak dibersihin                                | **Rp 4.000**                       | Bikin codebase susah dibaca & di-maintain         |
-| **L3 – Logic / Flow Error (Menengah)**          | Salah di alur logika / kondisi                          | Salah kondisi `if/else`, async gak `await`, infinite loop                                        | **Rp 8.000**                       | Efek langsung ke hasil akhir, bisa bug runtime    |
-| **L3.5 – Error Handling / Exception**           | Gak handle error dengan benar                           | Try-catch kosong, error gak di-log, promise rejection gak di-handle                              | **Rp 10.000**                      | Silent failure, susah debugging production        |
-| **L4 – Data Handling / Validation Error**       | Gagal handle data / validasi input                      | Input user gak di-sanitize, null/undefined gak di-handle, parsing asal                           | **Rp 12.000**                      | Potensi error runtime & celah keamanan            |
-| **L4.5 – Redundancy / Duplicate Logic**         | Mengulang potongan kode tanpa refactor / abstraction    | Copy-paste logic validasi di banyak file, fungsi mirip tapi beda dikit, gak pakai helper/service | **Rp 14.000**                      | Nambah technical debt, rawan bug saat maintenance |
-| **L5 – Performance Issue**                      | Kode gak efisien / boros resource                       | Query di loop (N+1), gak pakai caching, data structure gak optimal                               | **Rp 16.000**                      | Boros resource, ganggu performa sistem            |
-| **L6 – Security / Access Control Error**        | Gagal jaga autentikasi / data sensitif                  | Token gak diverifikasi, credential di code, endpoint gak aman                                    | **Rp 20.000**                      | Risiko tinggi, bisa bocor data / di-hack          |
-| **L7 – Architectural / Design Flaw (Advanced)** | Logic bisnis nyampur di controller / desain layer kacau | Logic transfer saldo di controller, circular dependency, spaghetti structure                     | **Rp 25.000**                      | Sulit maintenance, rawan duplikasi logic          |
+| **L1 – Basic Logic / Syntax Error**             | Kesalahan dasar yang seharusnya ketangkep lint/test     | Typo variabel, salah operator (`==` vs `===`), lupa `return`                                     | **Rp 200**                         | Kesalahan dasar, tanda kurang cek sebelum commit  |
+| **L2 – Code Style / Konsistensi**               | Ganggu readability / konsistensi tim                    | Nama variabel ambigu, indentasi acak, comment lama gak dibersihin                                | **Rp 400**                         | Bikin codebase susah dibaca & di-maintain         |
+| **L3 – Logic / Flow Error (Menengah)**          | Salah di alur logika / kondisi                          | Salah kondisi `if/else`, async gak `await`, infinite loop                                        | **Rp 800**                         | Efek langsung ke hasil akhir, bisa bug runtime    |
+| **L3.5 – Error Handling / Exception**           | Gak handle error dengan benar                           | Try-catch kosong, error gak di-log, promise rejection gak di-handle                              | **Rp 1.000**                       | Silent failure, susah debugging production        |
+| **L4 – Data Handling / Validation Error**       | Gagal handle data / validasi input                      | Input user gak di-sanitize, null/undefined gak di-handle, parsing asal                           | **Rp 1.200**                       | Potensi error runtime & celah keamanan            |
+| **L4.5 – Redundancy / Duplicate Logic**         | Mengulang potongan kode tanpa refactor / abstraction    | Copy-paste logic validasi di banyak file, fungsi mirip tapi beda dikit, gak pakai helper/service | **Rp 1.400**                       | Nambah technical debt, rawan bug saat maintenance |
+| **L5 – Performance Issue**                      | Kode gak efisien / boros resource                       | Query di loop (N+1), gak pakai caching, data structure gak optimal                               | **Rp 1.600**                       | Boros resource, ganggu performa sistem            |
+| **L6 – Security / Access Control Error**        | Gagal jaga autentikasi / data sensitif                  | Token gak diverifikasi, credential di code, endpoint gak aman                                    | **Rp 2.000**                       | Risiko tinggi, bisa bocor data / di-hack          |
+| **L7 – Architectural / Design Flaw (Advanced)** | Logic bisnis nyampur di controller / desain layer kacau | Logic transfer saldo di controller, circular dependency, spaghetti structure                     | **Rp 2.500**                       | Sulit maintenance, rawan duplikasi logic          |
 | **L8 – Regression / Repeat Offense**            | Ulang kesalahan yang sama padahal udah di-review        | Commit ulang bug sama, copy-paste code salah                                                     | **Denda ×2 dari level sebelumnya** | Menunjukkan careless / gak belajar dari review    |
-| **L9 – Testing / Documentation Gap**            | Gak ada test / dokumentasi untuk fitur penting          | Fitur baru tanpa unit test, API endpoint tanpa docs, complex logic tanpa comment                 | **Rp 6.000**                       | Susah maintain & onboarding, rawan regression     |
+| **L9 – Testing / Documentation Gap**            | Gak ada test / dokumentasi untuk fitur penting          | Fitur baru tanpa unit test, API endpoint tanpa docs, complex logic tanpa comment                 | **Rp 600**                         | Susah maintain & onboarding, rawan regression     |
 
 
 ---
 
 # 📑 Table of Contents
 
+## 🎯 Panduan Spesifik
+- **[🔧 Backend Guidelines](./backend/README.md)**
+  - [Node.js/TypeScript](./backend/README.md) - Express, NestJS, Fastify
+  - [🔵 Golang](./backend/GOLANG.md) - Gin, Echo, Fiber, Chi
+  - [🐘 PHP](./backend/PHP.md) - Laravel, Symfony, CodeIgniter
+- **[🎨 Frontend Guidelines](./frontend/README.md)** - React, Vue, Angular, Next.js
+
+## 📚 Panduan Umum
 1. [L1 – Basic Logic / Syntax Error](#-l1--basic-logic--syntax-error)
 2. [L2 – Code Style / Konsistensi](#️-l2--code-style--konsistensi)
 3. [L3 – Logic / Flow Error](#️-l3--logic--flow-error)
@@ -145,6 +160,106 @@ const useraddress = "..."; // no separator ❌
 const userName = "John";
 const userAge = 25;
 const userAddress = "...";
+```
+
+### **Case 4: Type `any` di TypeScript Interface/Type**
+**Real-World Case:**
+```typescript
+// ❌ Menggunakan 'any' menghilangkan type safety
+interface User {
+  id: string;
+  name: string;
+  data: any; // ❌ tidak ada type checking
+  metadata: any; // ❌ bisa berisi apapun
+}
+
+type ApiResponse = {
+  status: string;
+  result: any; // ❌ kehilangan informasi type
+};
+
+function processData(input: any): any { // ❌ double any
+  return input.someProperty;
+}
+```
+**Solusi Benar:**
+```typescript
+// ✅ Gunakan type yang spesifik
+interface User {
+  id: string;
+  name: string;
+  data: {
+    age: number;
+    address: string;
+    preferences: UserPreferences;
+  };
+  metadata: Record<string, string | number>; // atau Map<string, unknown>
+}
+
+interface UserPreferences {
+  theme: 'light' | 'dark';
+  language: string;
+  notifications: boolean;
+}
+
+type ApiResponse<T> = {
+  status: 'success' | 'error';
+  result: T; // Generic type
+  message?: string;
+};
+
+// Gunakan generic atau union type
+function processData<T extends { someProperty: string }>(input: T): string {
+  return input.someProperty;
+}
+
+// Jika benar-benar tidak tahu type-nya, gunakan 'unknown' bukan 'any'
+function parseJson(jsonString: string): unknown {
+  return JSON.parse(jsonString);
+}
+
+// Lalu lakukan type guard
+function isUser(obj: unknown): obj is User {
+  return (
+    typeof obj === 'object' &&
+    obj !== null &&
+    'id' in obj &&
+    'name' in obj
+  );
+}
+
+const parsed = parseJson(jsonString);
+if (isUser(parsed)) {
+  console.log(parsed.name); // ✅ Type-safe
+}
+```
+
+**Alternatif untuk kasus kompleks:**
+```typescript
+// Gunakan utility types
+type PartialUser = Partial<User>; // semua property jadi optional
+type ReadonlyUser = Readonly<User>; // semua property jadi readonly
+type UserKeys = keyof User; // 'id' | 'name' | 'data' | 'metadata'
+
+// Gunakan Record untuk object dengan dynamic keys
+type UserRoles = Record<string, {
+  permissions: string[];
+  level: number;
+}>;
+
+// Gunakan unknown + type narrowing
+function handleApiResponse(response: unknown): void {
+  if (
+    typeof response === 'object' &&
+    response !== null &&
+    'status' in response &&
+    'result' in response
+  ) {
+    // Type narrowing berhasil
+    const apiResponse = response as ApiResponse<unknown>;
+    console.log(apiResponse.status);
+  }
+}
 ```
 
 ---
@@ -1283,17 +1398,17 @@ describe('Orders API Integration Tests', () => {
 # 💰 Tabel Ringkasan Denda
 | Level | Jenis Kesalahan | Denda |
 |:------|:----------------|:-------|
-| L1 | Syntax / Basic Logic | Rp 2.000 |
-| L2 | Code Style / Konsistensi | Rp 4.000 |
-| L3 | Logic / Flow Error | Rp 8.000 |
-| L3.5 | Error Handling / Exception | Rp 10.000 |
-| L4 | Data Handling / Validation | Rp 12.000 |
-| L4.5 | Redundancy / Duplicate | Rp 14.000 |
-| L5 | Performance Issue | Rp 16.000 |
-| L6 | Security / Access Control | Rp 20.000 |
-| L7 | Architecture / Design Flaw | Rp 25.000 |
+| L1 | Syntax / Basic Logic | Rp 200 |
+| L2 | Code Style / Konsistensi | Rp 400 |
+| L3 | Logic / Flow Error | Rp 800 |
+| L3.5 | Error Handling / Exception | Rp 1.000 |
+| L4 | Data Handling / Validation | Rp 1.200 |
+| L4.5 | Redundancy / Duplicate | Rp 1.400 |
+| L5 | Performance Issue | Rp 1.600 |
+| L6 | Security / Access Control | Rp 2.000 |
+| L7 | Architecture / Design Flaw | Rp 2.500 |
 | L8 | Regression / Repeat Offense | ×2 dari level sebelumnya |
-| L9 | Testing / Documentation Gap | Rp 6.000 |
+| L9 | Testing / Documentation Gap | Rp 600 |
 
 ---
 
@@ -1307,6 +1422,7 @@ describe('Orders API Integration Tests', () => {
 - [ ] Semua variabel menggunakan naming convention yang konsisten (camelCase)
 - [ ] Tidak ada magic numbers (gunakan konstanta)
 - [ ] Tidak ada dead code atau comment yang tidak perlu
+- [ ] Tidak ada type `any` di TypeScript (gunakan type spesifik, generic, atau `unknown`)
 
 ### **2. Error Handling**
 - [ ] Semua async function di-wrap dengan try-catch
@@ -1529,6 +1645,46 @@ function getUser(id: string): User | null {
 }
 ```
 
+### **4. TypeScript ESLint Configuration (Mencegah `any` Type)**
+```json
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-unsafe-assignment": "error",
+    "@typescript-eslint/no-unsafe-member-access": "error",
+    "@typescript-eslint/no-unsafe-call": "error",
+    "@typescript-eslint/no-unsafe-return": "error",
+    "@typescript-eslint/explicit-function-return-type": "warn",
+    "@typescript-eslint/explicit-module-boundary-types": "warn",
+    "@typescript-eslint/strict-boolean-expressions": "error",
+    "@typescript-eslint/no-unnecessary-type-assertion": "error"
+  }
+}
+```
+
+**Install dependencies:**
+```bash
+npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin
+```
+
+**Benefit:**
+- ✅ Mencegah penggunaan `any` type
+- ✅ Enforce explicit return types
+- ✅ Detect unsafe type operations
+- ✅ Improve type safety di seluruh codebase
+
 ---
 
 ## 📊 Contoh Perhitungan Denda
@@ -1536,35 +1692,35 @@ function getUser(id: string): User | null {
 ### **Scenario 1: Multiple Errors dalam 1 PR**
 ```
 PR #123 - Feature: User Registration
-- L1: Typo variabel `userNmae` → Rp 2.000
-- L2: Magic number untuk password length → Rp 4.000
-- L4: Email tidak di-validasi → Rp 12.000
-- L6: Password tidak di-hash → Rp 20.000
+- L1: Typo variabel `userNmae` → Rp 200
+- L2: Magic number untuk password length → Rp 400
+- L4: Email tidak di-validasi → Rp 1.200
+- L6: Password tidak di-hash → Rp 2.000
 
-Total Denda: Rp 38.000
+Total Denda: Rp 3.800
 ```
 
 ### **Scenario 2: Repeat Offense**
 ```
 PR #100 - Review: "Gunakan === bukan =="
-Denda: Rp 2.000 (L1)
+Denda: Rp 200 (L1)
 
 PR #105 - Masih pakai == lagi (Repeat Offense)
-Denda: Rp 2.000 × 2 = Rp 4.000 (L8)
+Denda: Rp 200 × 2 = Rp 400 (L8)
 
 PR #110 - Masih pakai == lagi (Repeat Offense ke-2)
-Denda: Rp 4.000 × 2 = Rp 8.000 (L8)
+Denda: Rp 400 × 2 = Rp 800 (L8)
 ```
 
 ### **Scenario 3: Complex Bug**
 ```
 PR #200 - Bug Fix: Transfer Saldo Error
-- L3: Async/await salah di forEach → Rp 8.000
-- L5: N+1 query problem → Rp 16.000
-- L7: Logic bisnis di controller → Rp 25.000
-- L9: Tidak ada unit test → Rp 6.000
+- L3: Async/await salah di forEach → Rp 800
+- L5: N+1 query problem → Rp 1.600
+- L7: Logic bisnis di controller → Rp 2.500
+- L9: Tidak ada unit test → Rp 600
 
-Total Denda: Rp 55.000
+Total Denda: Rp 5.500
 ```
 
 ---
