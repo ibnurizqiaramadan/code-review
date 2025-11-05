@@ -163,6 +163,9 @@ const userAddress = "...";
 ```
 
 ### **Case 4: Type `any` di TypeScript Interface/Type**
+
+> **📖 Baca lebih detail:** [WHY-NO-ANY.md](./WHY-NO-ANY.md) - Penjelasan lengkap kenapa `any` harus dihindari
+
 **Real-World Case:**
 ```typescript
 // ❌ Menggunakan 'any' menghilangkan type safety

@@ -53,13 +53,13 @@ backend/
 ### **1. Response Utility**
 ```typescript
 // src/utils/response.util.ts
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   data?: T;
   error?: {
     code: string;
     message: string;
-    details?: any;
+    details?: unknown;
   };
   meta?: {
     page?: number;
@@ -81,7 +81,7 @@ export class ResponseUtil {
   static error(
     code: string,
     message: string,
-    details?: any
+    details?: unknown
   ): ApiResponse<never> {
     return {
       success: false,

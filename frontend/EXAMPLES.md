@@ -129,16 +129,19 @@ interface UseApiOptions<T> {
   onError?: (error: Error) => void;
 }
 
-export function useApi<T = any>(
-  apiFunc: (...args: any[]) => Promise<T>,
-  options?: UseApiOptions<T>
+// Define generic API function type
+type ApiFunction<TArgs extends unknown[], TResult> = (...args: TArgs) => Promise<TResult>;
+
+export function useApi<TArgs extends unknown[] = [], TResult = unknown>(
+  apiFunc: ApiFunction<TArgs, TResult>,
+  options?: UseApiOptions<TResult>
 ) {
-  const [data, setData] = useState<T | null>(null);
+  const [data, setData] = useState<TResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
   const execute = useCallback(
-    async (...args: any[]) => {
+    async (...args: TArgs) => {
       try {
         setLoading(true);
         setError(null);
@@ -405,7 +408,7 @@ class ApiService {
     // Response interceptor
     this.api.interceptors.response.use(
       (response) => response.data,
-      (error: AxiosError<ApiResponse<any>>) => {
+      (error: AxiosError<ApiResponse<unknown>>) => {
         if (error.response?.status === 401) {
           // Token expired or invalid
           localStorage.removeItem('token');
@@ -422,15 +425,15 @@ class ApiService {
     );
   }
 
-  async get<T>(url: string, params?: any): Promise<T> {
+  async get<T>(url: string, params?: Record<string, unknown>): Promise<T> {
     return this.api.get(url, { params });
   }
 
-  async post<T>(url: string, data?: any): Promise<T> {
+  async post<T>(url: string, data?: Record<string, unknown>): Promise<T> {
     return this.api.post(url, data);
   }
 
-  async put<T>(url: string, data?: any): Promise<T> {
+  async put<T>(url: string, data?: Record<string, unknown>): Promise<T> {
     return this.api.put(url, data);
   }
 
@@ -743,15 +746,26 @@ function App() {
 ```typescript
 import { useMemo, useCallback, memo } from 'react';
 
+// Define types
+interface UserListProps {
+  users: User[];
+  filter: string;
+}
+
+interface UserCardProps {
+  user: User;
+  onClick: (userId: string) => void;
+}
+
 // Expensive calculation
-function UserList({ users, filter }) {
+function UserList({ users, filter }: UserListProps) {
   const filteredUsers = useMemo(() => {
     return users.filter(user =>
       user.name.toLowerCase().includes(filter.toLowerCase())
     );
   }, [users, filter]);
 
-  const handleUserClick = useCallback((userId) => {
+  const handleUserClick = useCallback((userId: string) => {
     console.log('User clicked:', userId);
   }, []);
 
@@ -769,7 +783,7 @@ function UserList({ users, filter }) {
 }
 
 // Memoized component
-const UserCard = memo(({ user, onClick }) => {
+const UserCard = memo<UserCardProps>(({ user, onClick }) => {
   return (
     <div onClick={() => onClick(user.id)}>
       {user.name}

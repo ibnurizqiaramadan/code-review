@@ -13,6 +13,7 @@ code-review/
 ├── README.md                          # Panduan umum (semua bahasa)
 ├── SUMMARY.md                         # File ini - Overview lengkap
 ├── QUICK-REFERENCE.md                 # Quick reference card (printable)
+├── WHY-NO-ANY.md                      # Penjelasan kenapa 'any' type harus dihindari
 │
 ├── backend/
 │   ├── README.md                      # Node.js/TypeScript guidelines
