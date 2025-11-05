@@ -162,7 +162,88 @@ const userAge = 25;
 const userAddress = "...";
 ```
 
-### **Case 4: Type `any` di TypeScript Interface/Type**
+### **Case 4: Console.log untuk Testing & Commented Code**
+**Real-World Case:**
+```javascript
+// ❌ Console.log yang lupa dihapus
+function processPayment(amount) {
+  console.log('Processing payment:', amount); // ❌ Debug code
+  console.log('User data:', userData); // ❌ Lupa dihapus
+  
+  // ❌ Commented code yang tidak dihapus
+  // const oldLogic = calculateOldWay(amount);
+  // if (oldLogic > 100) {
+  //   return oldLogic * 0.9;
+  // }
+  
+  return calculateNewWay(amount);
+}
+
+// ❌ Dead code / unused function
+function oldCalculation(value) { // ❌ Tidak dipakai lagi
+  return value * 1.5;
+}
+```
+
+**Solusi Benar:**
+```javascript
+// ✅ Hapus semua console.log sebelum commit
+function processPayment(amount) {
+  // Gunakan proper logging library untuk production
+  logger.info('Processing payment', { amount }); // ✅ Structured logging
+  
+  return calculateNewWay(amount);
+}
+
+// ✅ Hapus commented code - gunakan Git history jika perlu
+// ✅ Hapus unused functions
+
+// Jika memang perlu log untuk debugging, gunakan debug library
+import debug from 'debug';
+const log = debug('app:payment');
+
+function processPayment(amount) {
+  log('Processing payment:', amount); // ✅ Hanya aktif saat DEBUG=app:* 
+  return calculateNewWay(amount);
+}
+```
+
+**Best Practices:**
+```javascript
+// ✅ Setup ESLint untuk detect console.log
+// .eslintrc.json
+{
+  "rules": {
+    "no-console": ["error", { "allow": ["warn", "error"] }]
+  }
+}
+
+// ✅ Gunakan pre-commit hook untuk check
+// package.json
+{
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  }
+}
+
+// ✅ Untuk debugging, gunakan debugger statement atau debug library
+function complexCalculation(data) {
+  debugger; // ✅ Akan di-remove oleh build tools
+  
+  // atau
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Debug:', data); // ✅ Conditional logging
+  }
+}
+```
+
+**Denda:** Rp 400 per console.log atau commented code block
+
+---
+
+### **Case 5: Type `any` di TypeScript Interface/Type**
 
 > **📖 Baca lebih detail:** [WHY-NO-ANY.md](./WHY-NO-ANY.md) - Penjelasan lengkap kenapa `any` harus dihindari
 
@@ -1425,6 +1506,8 @@ describe('Orders API Integration Tests', () => {
 - [ ] Semua variabel menggunakan naming convention yang konsisten (camelCase)
 - [ ] Tidak ada magic numbers (gunakan konstanta)
 - [ ] Tidak ada dead code atau comment yang tidak perlu
+- [ ] **Tidak ada `console.log()` untuk debugging** (gunakan logger atau debug library)
+- [ ] **Tidak ada commented code** (hapus atau commit ke Git history)
 - [ ] Tidak ada type `any` di TypeScript (gunakan type spesifik, generic, atau `unknown`)
 
 ### **2. Error Handling**
@@ -1598,7 +1681,7 @@ export default [
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
     "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-    "no-console": ["warn"],
+    "no-console": ["error", { "allow": ["warn", "error"] }],
     "no-debugger": ["error"],
     "no-var": ["error"],
     "prefer-const": ["error"],

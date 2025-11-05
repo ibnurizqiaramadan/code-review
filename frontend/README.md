@@ -241,11 +241,14 @@ import { FixedSizeList } from 'react-window';
 
 ## ✅ Frontend Commit Checklist
 
-### **Component**
-- [ ] TypeScript interfaces untuk props
-- [ ] PropTypes atau Zod validation
+### **Code Quality**
+- [ ] No syntax error atau typo
+- [ ] Consistent naming (camelCase/PascalCase)
+- [ ] No magic values
 - [ ] No unused imports/variables
-- [ ] Consistent naming (PascalCase untuk components)
+- [ ] **No `console.log()` untuk debugging**
+- [ ] **No commented code** (hapus atau Git history)
+- [ ] TypeScript interfaces untuk props
 - [ ] No inline styles (gunakan CSS modules/Tailwind)
 
 ### **State Management**

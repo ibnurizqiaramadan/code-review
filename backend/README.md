@@ -107,6 +107,15 @@ Selalu gunakan parameterized query
 - [ ] No SQL injection
 - [ ] CORS & rate limiting
 
+### **Code Quality**
+- [ ] No syntax error atau typo
+- [ ] Consistent naming convention
+- [ ] No magic numbers/strings
+- [ ] No dead code
+- [ ] **No `console.log()` untuk debugging** (gunakan logger)
+- [ ] **No commented code** (hapus atau Git history)
+- [ ] Type safety (TypeScript)
+
 ### **Architecture**
 - [ ] Logic in service layer
 - [ ] No circular dependencies

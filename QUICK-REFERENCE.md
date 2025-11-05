@@ -31,6 +31,8 @@ Panduan cepat yang bisa di-print atau di-bookmark
 - [ ] Consistent naming (camelCase/PascalCase)
 - [ ] No magic numbers (gunakan konstanta)
 - [ ] No dead code atau unused imports
+- [ ] **No `console.log()` untuk debugging**
+- [ ] **No commented code** (hapus atau Git history)
 - [ ] **TypeScript**: No `any` type
 
 ### **⚡ Logic & Error (L3-L3.5)**
@@ -143,6 +145,15 @@ Panduan cepat yang bisa di-print atau di-bookmark
 ---
 
 ## 🐛 Common Mistakes
+
+### **General (All)**
+```
+❌ console.log() lupa dihapus: console.log('debug:', data)
+❌ Commented code: // const oldLogic = ...
+❌ Dead code: function unused() { ... }
+❌ TypeScript any: data: any
+❌ Magic numbers: if (status === 200)
+```
 
 ### **Backend**
 ```
